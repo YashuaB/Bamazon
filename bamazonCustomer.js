@@ -36,7 +36,10 @@ function startPrompt() {
             inventory()
         } else {
             console.log("Thank you! Come back soon!")
+            
         }
+        
+
     })
 }
 
@@ -117,7 +120,9 @@ function selectionPrompt() {
         connection.query("SELECT * FROM products WHERE item_id=?", userPurchase.inputId, function(err, res) {
             for (var i = 0; i < res.length; i++) {
 
-                if (userPurchase.inputNumber > res[i].stock_quantity) {
+           var purchaseNum =   parseInt(userPurchase.inputNumber) 
+            var inStock =  parseInt(res[i].stock_quantiy) 
+                if (purchaseNum > inStock) {
                   console.log("Sorry! Not enough in stock. Please try again later.")
                      startPrompt()
 
@@ -128,11 +133,11 @@ function selectionPrompt() {
                                 Item: ${res[i].product_name}
                           Department: ${res[i].department_name}
                               Price: ${res[i].price}
-                            Quantity: ${userPurchase.inputNumber}
-                              Total: ${res[i].price * userPurchase.inputNumber}`)
+                            Quantity: ${purchaseNum}
+                              Total: ${res[i].price * purchaseNum}`)
       
 
-                    var newStock = (res[i].stock_quantity - userPurchase.inputNumber);
+                    var newStock = (res[i].stock_quantiy - userPurchase.inputNumber);
                     var purchaseId = (userPurchase.inputId);
                     
                     confirmPrompt(newStock, purchaseId)
@@ -161,7 +166,7 @@ function confirmPrompt(newStock, purchaseId) {
             
             startPrompt()
         } else {
-              console.log("No worries. Maybe next time!")
+              console.log("No worries. Maybe next time! /n")
             
             startPrompt()
         }
