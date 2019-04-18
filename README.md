@@ -16,3 +16,6 @@ git clone https://github.com/YashuaB/Bamazon.git
 cd bamazon
 npm install
 node bamazonCustomer.js
+
+
+Video example of how the app works: https://drive.google.com/file/d/18pvS3-BaLjkCPKBsZASvoPbK5rWVhJm4/view
